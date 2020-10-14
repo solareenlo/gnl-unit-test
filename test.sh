@@ -3,7 +3,7 @@
 set -e
 
 cd $(dirname $0)
-gcc -Wall -Werror -Wextra main1.c get_next_line.c get_next_line_utils.c -o a.out -D BUFFER_SIZE=128 || (echo COMPILATION FAILED && exit 1)
+gcc -Wall -Werror -Wextra main1.c get_next_line.c -o a.out -D BUFFER_SIZE=128 || (echo COMPILATION FAILED && exit 1)
 echo ">>>>>>>>>>> Read main1.c"
 ./a.out < main1.c > yours || (echo EXECUTION FAILED && exit 1)
 ./test.out < main1.c > ours
@@ -42,7 +42,7 @@ diff yours ours || (echo FAILED && exit 1)
 rm -f lol
 rm -f lol1
 echo ">>>>>>>>>>> Sequential Read"
-gcc -Wall -Werror -Wextra main2.c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=128 -o a.out
+gcc -Wall -Werror -Wextra main2.c get_next_line.c -D BUFFER_SIZE=128 -o a.out
 gcc -Wall -Werror -Wextra main2_generator.c -o gen.out
 ./gen.out > ours
 ./a.out > yours || (echo EXECUTION FAILED && exit 1)
